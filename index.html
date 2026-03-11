@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satuan Intelijen Kodam XXIII / Palaka Wira – TNI AD</title>
+<meta name="description" content="Satuan Intelijen Kodam XXIII/Palaka Wira – Mengawal stabilitas wilayah melalui deteksi dini, analisis intelijen, dan pengamanan informasi strategis.">
+<meta name="keywords" content="Satuan Intelijen, Kodam XXIII, Palaka Wira, TNI AD, Intelijen Militer">
+<meta property="og:title" content="Satuan Intelijen Kodam XXIII / Palaka Wira">
+<meta property="og:description" content="Mengawal stabilitas wilayah melalui deteksi dini, analisis intelijen, dan pengamanan informasi strategis.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET & BASE ──────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --mil-green:    #2F4F2F;
+  --mil-green-lt: #3d6b3d;
+  --mil-green-dk: #1a2e1a;
+  --accent:       #4a9e4a;
+  --accent-glow:  rgba(74,158,74,.35);
+  --amber:        #c8943a;
+  --amber-lt:     #e0aa55;
+  --black:        #050a05;
+  --dark:         #0d1a0d;
+  --dark2:        #111f11;
+  --mid:          #1c2e1c;
+  --gray:         #2e3e2e;
+  --gray-lt:      #4a5e4a;
+  --steel:        #8a9e8a;
+  --text:         #c8d8c8;
+  --text-lt:      #e8f0e8;
+  --white:        #f0f5f0;
+  --border:       rgba(74,158,74,.18);
+  --border-lt:    rgba(74,158,74,.35);
+  --grid-line:    rgba(74,158,74,.07);
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body:    'Barlow', sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+  --transition:   .3s cubic-bezier(.25,.46,.45,.94);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: default;
+}
+::selection { background: var(--accent); color: var(--black); }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ── SCROLLBAR ─────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--mil-green); border-radius: 3px; }
+
+/* ── GLOBAL GRID BG ────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── SCAN LINE OVERLAY ─────────────────────────── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);
+}
+
+/* ── UTILITIES ─────────────────────────────────── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: .6rem;
+  margin-bottom: 1rem;
+}
+.section-tag::before {
+  content: '//';
+  opacity: .5;
+}
+.section-tag::after {
+  content: '';
+  display: block; width: 40px; height: 1px;
+  background: var(--accent); opacity: .5;
+}
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
+.reveal-right.visible { opacity: 1; transform: none; }
+
+/* ── NAVBAR ────────────────────────────────────── */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 1.2rem 0;
+  transition: all var(--transition);
+}
+#navbar.scrolled {
+  background: rgba(5,10,5,.95);
+  backdrop-filter: blur(12px);
+  padding: .8rem 0;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 30px rgba(0,0,0,.5);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 1rem;
+}
+.nav-emblem {
+  width: 42px; height: 42px;
+  background: linear-gradient(135deg, var(--mil-green), var(--mil-green-dk));
+  border: 1px solid var(--border-lt);
+  display: flex; align-items: center; justify-content: center;
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  flex-shrink: 0;
+  position: relative;
+}
+.nav-emblem::before {
+  content: '⬡';
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+.nav-titles { display: flex; flex-direction: column; }
+.nav-title-main {
+  font-family: var(--font-display);
+  font-size: .95rem; font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--white);
+  line-height: 1.1;
+}
+.nav-title-sub {
+  font-family: var(--font-mono);
+  font-size: .58rem; color: var(--accent);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 2.5rem;
+}
+.nav-links a {
+  font-family: var(--font-display);
+  font-size: .85rem; font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  position: relative;
+  transition: color var(--transition);
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--transition);
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-status {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: var(--font-mono);
+  font-size: .65rem; color: var(--accent);
+  letter-spacing: .1em;
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(.7); }
+}
+.nav-toggle {
+  display: none;
+  flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
+}
+.nav-toggle span {
+  display: block; width: 24px; height: 2px;
+  background: var(--text); transition: all var(--transition);
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE NAV ────────────────────────────────── */
+.mobile-nav {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 999; background: rgba(5,10,5,.98);
+  flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  backdrop-filter: blur(20px);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-family: var(--font-display);
+  font-size: 1.8rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--text-lt);
+  transition: color var(--transition);
+}
+.mobile-nav a:hover { color: var(--accent); }
+
+/* ── HERO ──────────────────────────────────────── */
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  overflow: hidden;
+  padding-top: 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(160deg, rgba(5,10,5,.97) 0%, rgba(13,26,13,.9) 40%, rgba(17,31,17,.85) 100%),
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(47,79,47,.25) 0%, transparent 60%);
+}
+.hero-bg-pattern {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 75% 50%, rgba(74,158,74,.08) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(47,79,47,.1) 0%, transparent 40%);
+}
+.hero-radar {
+  position: absolute; right: -100px; top: 50%;
+  transform: translateY(-50%);
+  width: 700px; height: 700px; z-index: 1;
+  opacity: .12;
+}
+.hero-radar::before, .hero-radar::after, .radar-ring {
+  position: absolute; border-radius: 50%; border: 1px solid var(--accent);
+}
+.hero-radar::before {
+  content: '';
+  inset: 0;
+}
+.hero-radar::after {
+  content: '';
+  inset: 100px;
+}
+.radar-ring {
+  position: absolute; border-radius: 50%; border: 1px solid var(--accent);
+}
+.radar-sweep {
+  position: absolute; inset: 0;
+  background: conic-gradient(from 0deg, transparent 270deg, rgba(74,158,74,.4) 360deg);
+  border-radius: 50%;
+  animation: radar-spin 4s linear infinite;
+  z-index: 2;
+}
+@keyframes radar-spin { to { transform: rotate(360deg); } }
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 800px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .7rem;
+  background: rgba(47,79,47,.3);
+  border: 1px solid var(--border-lt);
+  padding: .4rem 1rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-mono);
+  font-size: .65rem; color: var(--accent);
+  letter-spacing: .2em; text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%; animation: pulse-dot 2s infinite;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.01em;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero-title .line-accent { color: var(--accent); }
+.hero-title .line-small {
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+  color: var(--steel);
+  display: block;
+  margin-top: .4rem;
+}
+.hero-divider {
+  width: 80px; height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin-bottom: 1.8rem;
+}
+.hero-subtitle {
+  font-size: 1.1rem; font-weight: 300; line-height: 1.7;
+  color: var(--steel);
+  max-width: 580px;
+  margin-bottom: 3rem;
+}
+.hero-cta {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: var(--mil-green);
+  border: 1px solid var(--mil-green-lt);
+  color: var(--white);
+  padding: .9rem 2rem;
+  font-family: var(--font-display);
+  font-size: .9rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: all var(--transition);
+  position: relative; overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+  transform: translateX(-100%);
+  transition: transform .5s ease;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover {
+  background: var(--mil-green-lt);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: transparent;
+  border: 1px solid var(--border-lt);
+  color: var(--text-lt);
+  padding: .9rem 2rem;
+  font-family: var(--font-display);
+  font-size: .9rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: all var(--transition);
+}
+.btn-ghost:hover {
+  background: rgba(74,158,74,.1);
+  border-color: var(--accent);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.hero-stats {
+  position: absolute; bottom: 3rem; right: 0; z-index: 2;
+  display: flex; gap: 2.5rem;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 900;
+  color: var(--accent); line-height: 1;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: .6rem; color: var(--steel);
+  letter-spacing: .15em; text-transform: uppercase;
+  margin-top: .3rem;
+}
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, transparent, var(--accent));
+  animation: scroll-drop 1.5s ease-in-out infinite;
+}
+@keyframes scroll-drop {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+.scroll-label {
+  font-family: var(--font-mono);
+  font-size: .6rem; color: var(--steel);
+  letter-spacing: .2em; text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+/* ticker */
+.hero-ticker {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+  background: rgba(47,79,47,.25);
+  border-top: 1px solid var(--border);
+  padding: .6rem 0;
+  overflow: hidden;
+}
+.ticker-inner {
+  display: flex; align-items: center; gap: 0;
+  animation: ticker-scroll 35s linear infinite;
+  white-space: nowrap;
+}
+@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-item {
+  font-family: var(--font-mono);
+  font-size: .68rem; color: var(--accent);
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 0 3rem;
+}
+.ticker-sep { color: var(--mil-green-lt); }
+
+/* ── SECTIONS COMMON ───────────────────────────── */
+section { position: relative; z-index: 1; }
+.section-header { margin-bottom: 4rem; }
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: var(--white);
+  line-height: 1.05;
+}
+.section-heading .accent { color: var(--accent); }
+.section-sub {
+  margin-top: 1rem;
+  font-size: .95rem; font-weight: 300; line-height: 1.7;
+  color: var(--steel);
+  max-width: 600px;
+}
+.divider-accent {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 1.2rem 0;
+}
+
+/* ── ABOUT ─────────────────────────────────────── */
+#about {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.about-text p {
+  font-size: 1rem; line-height: 1.85;
+  color: var(--text); margin-bottom: 1.5rem;
+}
+.about-text p strong { color: var(--accent); font-weight: 600; }
+.about-cards {
+  display: grid; grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+.about-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  display: flex; align-items: center; gap: 1.2rem;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  transition: all var(--transition);
+  position: relative; overflow: hidden;
+}
+.about-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--accent); opacity: 0;
+  transition: opacity var(--transition);
+}
+.about-card:hover { border-color: var(--border-lt); background: rgba(47,79,47,.3); transform: translateX(4px); }
+.about-card:hover::before { opacity: 1; }
+.card-icon {
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: rgba(74,158,74,.15);
+  border: 1px solid var(--border-lt);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.card-info .card-title {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700;
+  color: var(--white); letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.card-info .card-desc {
+  font-size: .8rem; color: var(--steel); margin-top: .3rem; line-height: 1.5;
+}
+
+/* ── TUGAS & FUNGSI ────────────────────────────── */
+#tugas {
+  padding: 8rem 0;
+  background: var(--dark);
+}
+.tugas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.tugas-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+  transition: all var(--transition);
+  overflow: hidden;
+}
+.tugas-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0; transition: opacity var(--transition);
+}
+.tugas-card:hover { border-color: var(--border-lt); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+.tugas-card:hover::after { opacity: 1; }
+.tugas-num {
+  font-family: var(--font-mono);
+  font-size: .65rem; color: var(--accent);
+  letter-spacing: .2em; margin-bottom: 1rem;
+}
+.tugas-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+.tugas-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--white); letter-spacing: .05em;
+  text-transform: uppercase; margin-bottom: .7rem;
+}
+.tugas-desc { font-size: .85rem; color: var(--steel); line-height: 1.65; }
+
+/* ── CYBER MONITORING ──────────────────────────── */
+#cyber {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+}
+.cyber-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 4rem; align-items: start;
+}
+.cyber-text p { font-size: .95rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem; }
+.dashboard-mock {
+  background: var(--mid);
+  border: 1px solid var(--border-lt);
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+}
+.dash-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.5rem; padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.dash-dots { display: flex; gap: .4rem; }
+.dash-dots span {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.dash-dots span:nth-child(1) { background: #ff5f57; }
+.dash-dots span:nth-child(2) { background: #ffbd2e; }
+.dash-dots span:nth-child(3) { background: #28ca41; }
+.dash-title { font-size: .65rem; color: var(--steel); letter-spacing: .15em; text-transform: uppercase; }
+.dash-status-row {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .65rem; color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.dash-status-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; animation: pulse-dot 1.5s infinite; }
+.dash-modules {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.dash-module {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  padding: 1rem;
+}
+.dash-mod-label { font-size: .58rem; color: var(--steel); letter-spacing: .15em; text-transform: uppercase; margin-bottom: .5rem; }
+.dash-mod-val { font-size: 1.4rem; font-weight: 700; color: var(--white); }
+.dash-mod-val.green { color: var(--accent); }
+.dash-mod-val.amber { color: var(--amber); }
+.dash-mod-val.red { color: #e05555; }
+.dash-bar {
+  height: 3px; background: var(--dark2); border-radius: 2px;
+  margin-top: .5rem; overflow: hidden;
+}
+.dash-bar-fill {
+  height: 100%; background: var(--accent);
+  transition: width 1.5s ease;
+}
+.dash-bar-fill.amber { background: var(--amber); }
+.dash-bar-fill.red { background: #e05555; }
+.dash-log {
+  margin-top: 1.2rem;
+  font-size: .6rem; color: var(--gray-lt);
+}
+.dash-log-item { padding: .3rem 0; border-bottom: 1px solid var(--border); display: flex; gap: .7rem; }
+.dash-log-time { color: var(--accent); }
+.dash-log-msg { color: var(--steel); }
+.dash-log-msg.alert { color: var(--amber); }
+.dash-log-msg.clear { color: #5a9e5a; }
+.cyber-metrics {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin-top: 2rem;
+}
+.metric-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  padding: 1.2rem;
+  text-align: center;
+  transition: all var(--transition);
+}
+.metric-card:hover { border-color: var(--accent); }
+.metric-icon { font-size: 1.5rem; margin-bottom: .5rem; }
+.metric-label { font-family: var(--font-mono); font-size: .65rem; color: var(--steel); letter-spacing: .1em; text-transform: uppercase; }
+
+/* ── WILAYAH ───────────────────────────────────── */
+#wilayah {
+  padding: 8rem 0;
+  background: var(--dark2);
+}
+.wilayah-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 4rem; align-items: start;
+}
+.map-container {
+  background: var(--mid);
+  border: 1px solid var(--border-lt);
+  padding: 2rem;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  position: relative; min-height: 380px;
+}
+.map-svg {
+  width: 100%; fill: none;
+}
+.map-header {
+  font-family: var(--font-mono);
+  font-size: .6rem; color: var(--accent);
+  letter-spacing: .2em; text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: .7rem;
+}
+.map-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.wilayah-info { padding: 1rem 0; }
+.wilayah-info p { font-size: .95rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem; }
+.wilayah-list { display: flex; flex-direction: column; gap: .8rem; }
+.wilayah-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: .9rem 1.2rem;
+  background: var(--mid); border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: .9rem; font-weight: 600;
+  color: var(--text-lt); letter-spacing: .05em;
+  text-transform: uppercase;
+  transition: all var(--transition);
+}
+.wilayah-item:hover { border-color: var(--border-lt); color: var(--white); transform: translateX(5px); }
+.wilayah-item::before { content: '▸'; color: var(--accent); font-size: .7rem; }
+
+/* ── PUBLIKASI ─────────────────────────────────── */
+#publikasi {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, var(--dark2) 0%, var(--dark) 100%);
+}
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.pub-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: all var(--transition);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+.pub-card:hover { border-color: var(--border-lt); transform: translateY(-5px); box-shadow: 0 12px 35px rgba(0,0,0,.5); }
+.pub-card-img {
+  height: 160px;
+  background: linear-gradient(135deg, var(--mil-green-dk), var(--dark2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.pub-card-img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 10px,
+    rgba(74,158,74,.04) 10px, rgba(74,158,74,.04) 11px
+  );
+}
+.pub-card-body { padding: 1.5rem; }
+.pub-meta {
+  display: flex; align-items: center; gap: .7rem;
+  margin-bottom: .7rem;
+}
+.pub-cat {
+  font-family: var(--font-mono);
+  font-size: .6rem; color: var(--accent);
+  letter-spacing: .15em; text-transform: uppercase;
+  background: rgba(74,158,74,.12);
+  border: 1px solid var(--border);
+  padding: .2rem .6rem;
+}
+.pub-date { font-family: var(--font-mono); font-size: .6rem; color: var(--steel); }
+.pub-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--white); text-transform: uppercase;
+  letter-spacing: .03em; line-height: 1.3;
+  margin-bottom: .7rem;
+}
+.pub-excerpt { font-size: .82rem; color: var(--steel); line-height: 1.65; }
+.pub-link {
+  display: inline-flex; align-items: center; gap: .4rem;
+  margin-top: 1rem;
+  font-family: var(--font-mono); font-size: .65rem;
+  color: var(--accent); letter-spacing: .1em; text-transform: uppercase;
+  transition: gap var(--transition);
+}
+.pub-link:hover { gap: .8rem; }
+
+/* ── VISI MISI ─────────────────────────────────── */
+#visi {
+  padding: 8rem 0;
+  background: var(--dark);
+  position: relative; overflow: hidden;
+}
+#visi::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 800px; border-radius: 50%;
+  border: 1px solid var(--border);
+  pointer-events: none; z-index: 0;
+}
+#visi::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px; border-radius: 50%;
+  border: 1px solid rgba(74,158,74,.08);
+  pointer-events: none; z-index: 0;
+}
+.visi-inner { position: relative; z-index: 1; }
+.visi-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; margin-top: 1rem;
+}
+.visi-card {
+  background: rgba(28,46,28,.5);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+  backdrop-filter: blur(6px);
+}
+.visi-card-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--accent); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: .8rem;
+}
+.visi-card-title::before {
+  content: '';
+  display: inline-block; width: 10px; height: 10px;
+  background: var(--accent);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+.visi-body { font-size: .95rem; line-height: 1.8; color: var(--text); }
+.misi-list { display: flex; flex-direction: column; gap: .9rem; }
+.misi-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  font-size: .92rem; color: var(--text); line-height: 1.65;
+}
+.misi-bullet {
+  width: 20px; height: 20px; flex-shrink: 0;
+  background: rgba(74,158,74,.15);
+  border: 1px solid var(--border-lt);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: .5rem; color: var(--accent);
+  margin-top: 2px;
+}
+
+/* ── KONTAK ────────────────────────────────────── */
+#kontak {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+}
+.kontak-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+}
+.kontak-info { display: flex; flex-direction: column; gap: 1.5rem; }
+.contact-item {
+  display: flex; gap: 1.2rem; align-items: flex-start;
+  padding: 1.3rem;
+  background: var(--mid); border: 1px solid var(--border);
+  transition: all var(--transition);
+}
+.contact-item:hover { border-color: var(--border-lt); }
+.contact-icon {
+  font-size: 1.3rem; flex-shrink: 0;
+  width: 44px; height: 44px;
+  background: rgba(74,158,74,.12);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-label {
+  font-family: var(--font-mono); font-size: .6rem;
+  color: var(--accent); letter-spacing: .15em; text-transform: uppercase;
+  margin-bottom: .3rem;
+}
+.contact-value { font-size: .9rem; color: var(--text-lt); line-height: 1.5; }
+.kontak-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.form-group { display: flex; flex-direction: column; gap: .5rem; }
+.form-label {
+  font-family: var(--font-mono); font-size: .6rem;
+  color: var(--steel); letter-spacing: .15em; text-transform: uppercase;
+}
+.form-input, .form-textarea {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  color: var(--text-lt);
+  padding: .9rem 1.2rem;
+  font-family: var(--font-body); font-size: .9rem;
+  outline: none; resize: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.form-textarea { min-height: 130px; }
+.form-submit {
+  align-self: flex-start;
+  background: var(--mil-green);
+  border: 1px solid var(--mil-green-lt);
+  color: var(--white);
+  padding: 1rem 2.5rem;
+  font-family: var(--font-display);
+  font-size: .95rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: all var(--transition);
+  position: relative; overflow: hidden;
+}
+.form-submit::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+  transform: translateX(-100%); transition: transform .5s;
+}
+.form-submit:hover::before { transform: translateX(100%); }
+.form-submit:hover { background: var(--mil-green-lt); box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
+
+/* ── FOOTER ────────────────────────────────────── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 4rem 0 2rem;
+  position: relative; z-index: 1;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.footer-brand .brand-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 800;
+  color: var(--white); letter-spacing: .08em;
+  text-transform: uppercase; margin-bottom: .3rem;
+}
+.footer-brand .brand-sub {
+  font-family: var(--font-mono); font-size: .65rem;
+  color: var(--steel); letter-spacing: .15em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.footer-brand p { font-size: .85rem; color: var(--steel); line-height: 1.7; }
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: .9rem; font-weight: 700;
+  color: var(--white); letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--border);
+}
+.footer-links { display: flex; flex-direction: column; gap: .6rem; }
+.footer-links a {
+  font-size: .85rem; color: var(--steel);
+  display: flex; align-items: center; gap: .5rem;
+  transition: color var(--transition), transform var(--transition);
+}
+.footer-links a::before { content: '›'; color: var(--accent); }
+.footer-links a:hover { color: var(--text-lt); transform: translateX(3px); }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy {
+  font-family: var(--font-mono); font-size: .65rem;
+  color: var(--gray-lt); letter-spacing: .1em;
+}
+.footer-copy span { color: var(--accent); }
+.footer-badge {
+  font-family: var(--font-mono); font-size: .6rem;
+  color: var(--steel); letter-spacing: .1em; text-transform: uppercase;
+  display: flex; align-items: center; gap: .5rem;
+}
+.footer-badge::before {
+  content: '';
+  width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+}
+
+/* ── BACK TO TOP ───────────────────────────────── */
+#btt {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+  width: 44px; height: 44px;
+  background: var(--mil-green);
+  border: 1px solid var(--mil-green-lt);
+  display: flex; align-items: center; justify-content: center;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  cursor: pointer;
+  opacity: 0; transform: translateY(20px);
+  transition: all var(--transition);
+  font-size: .9rem;
+  color: var(--white);
+}
+#btt.show { opacity: 1; transform: none; }
+#btt:hover { background: var(--mil-green-lt); box-shadow: 0 0 15px var(--accent-glow); }
+
+/* ── DARK MODE TOGGLE ──────────────────────────── */
+#dark-toggle {
+  position: fixed; bottom: 2rem; left: 2rem; z-index: 500;
+  width: 44px; height: 44px;
+  background: var(--mid);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  cursor: pointer;
+  font-size: .9rem;
+  transition: all var(--transition);
+}
+#dark-toggle:hover { border-color: var(--accent); }
+
+/* ── LIGHT MODE ────────────────────────────────── */
+body.light-mode {
+  --black:  #f0f4f0;
+  --dark:   #e4eae4;
+  --dark2:  #dce5dc;
+  --mid:    #d0dcd0;
+  --text:   #2a3c2a;
+  --text-lt:#1a2c1a;
+  --steel:  #4a6a4a;
+  --border: rgba(47,79,47,.25);
+  --border-lt: rgba(47,79,47,.45);
+  --white:  #0d1a0d;
+}
+body.light-mode #navbar.scrolled { background: rgba(240,244,240,.95); }
+body.light-mode .hero-title { color: #0d1a0d; }
+body.light-mode .hero-title .line-small { color: #4a6a4a; }
+
+/* ── RESPONSIVE ────────────────────────────────── */
+@media (max-width: 1024px) {
+  .tugas-grid { grid-template-columns: repeat(2, 1fr); }
+  .pub-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-status { display: none; }
+  .nav-toggle { display: flex; }
+  .about-grid, .cyber-grid, .wilayah-grid, .kontak-grid, .visi-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .tugas-grid { grid-template-columns: 1fr; }
+  .pub-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-stats { display: none; }
+  .hero-scroll { display: none; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 1.2rem; }
+  section { padding: 5rem 0 !important; }
+  .hero-cta { flex-direction: column; }
+  .btn-primary, .btn-ghost { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-emblem"></div>
+        <div class="nav-titles">
+          <div class="nav-title-main">Satuan Intelijen</div>
+          <div class="nav-title-sub">Kodam XXIII / Palaka Wira · TNI AD</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#about">Profil</a>
+        <a href="#tugas">Tugas & Fungsi</a>
+        <a href="#cyber">Intel Siber</a>
+        <a href="#wilayah">Wilayah</a>
+        <a href="#publikasi">Publikasi</a>
+        <a href="#kontak">Kontak</a>
+      </div>
+      <div class="nav-status">
+        <div class="status-dot"></div>
+        SISTEM AKTIF
+      </div>
+      <div class="nav-toggle" id="navToggle" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="toggleMobileNav()">Profil</a>
+  <a href="#tugas" onclick="toggleMobileNav()">Tugas & Fungsi</a>
+  <a href="#cyber" onclick="toggleMobileNav()">Intel Siber</a>
+  <a href="#wilayah" onclick="toggleMobileNav()">Wilayah</a>
+  <a href="#publikasi" onclick="toggleMobileNav()">Publikasi</a>
+  <a href="#visi" onclick="toggleMobileNav()">Visi & Misi</a>
+  <a href="#kontak" onclick="toggleMobileNav()">Kontak</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-pattern"></div>
+  
+  <!-- Radar -->
+  <div class="hero-radar">
+    <div style="position:absolute;inset:150px;border:1px solid rgba(74,158,74,.5);border-radius:50%;"></div>
+    <div style="position:absolute;inset:250px;border:1px solid rgba(74,158,74,.4);border-radius:50%;"></div>
+    <div style="position:absolute;inset:310px;border:1px solid rgba(74,158,74,.3);border-radius:50%;"></div>
+    <div class="radar-sweep"></div>
+    <!-- crosshairs -->
+    <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(74,158,74,.3);transform:translateY(-50%);"></div>
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(74,158,74,.3);transform:translateX(-50%);"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge" data-reveal>
+        <div class="hero-badge-dot"></div>
+        TNI AD — Tentara Nasional Indonesia Angkatan Darat
+      </div>
+      <h1 class="hero-title" data-reveal>
+        Satuan<br>
+        <span class="line-accent">Intelijen</span><br>
+        <span class="line-small">Kodam XXIII / Palaka Wira</span>
+      </h1>
+      <div class="hero-divider" data-reveal></div>
+      <p class="hero-subtitle" data-reveal>
+        Mengawal stabilitas wilayah melalui deteksi dini, analisis intelijen, dan pengamanan informasi strategis.
+      </p>
+      <div class="hero-cta" data-reveal>
+        <a href="#about" class="btn-primary">⬡ Profil Satuan</a>
+        <a href="#tugas" class="btn-ghost">▸ Tugas dan Fungsi</a>
+        <a href="#publikasi" class="btn-ghost">▸ Publikasi</a>
+        <a href="#kontak" class="btn-ghost">▸ Kontak</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Monitoring</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Terenkripsi</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">AKTIF</div>
+      <div class="stat-label">Operasional</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <div class="scroll-label">Scroll</div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="hero-ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">◆ Sistem Intelijen Aktif</span>
+      <span class="ticker-item">◆ Monitoring Wilayah 24/7</span>
+      <span class="ticker-item">◆ Deteksi Dini Ancaman</span>
+      <span class="ticker-item">◆ Analisis Intelijen Strategis</span>
+      <span class="ticker-item">◆ Pengamanan Informasi Negara</span>
+      <span class="ticker-item">◆ Dukungan Operasi Teritorial</span>
+      <span class="ticker-item">◆ Kodam XXIII / Palaka Wira</span>
+      <span class="ticker-item">◆ Sistem Intelijen Aktif</span>
+      <span class="ticker-item">◆ Monitoring Wilayah 24/7</span>
+      <span class="ticker-item">◆ Deteksi Dini Ancaman</span>
+      <span class="ticker-item">◆ Analisis Intelijen Strategis</span>
+      <span class="ticker-item">◆ Pengamanan Informasi Negara</span>
+      <span class="ticker-item">◆ Dukungan Operasi Teritorial</span>
+      <span class="ticker-item">◆ Kodam XXIII / Palaka Wira</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal-left">
+        <div class="section-header">
+          <div class="section-tag">IDENTITAS SATUAN</div>
+          <h2 class="section-heading">Tentang <span class="accent">Satuan Intelijen</span></h2>
+          <div class="divider-accent"></div>
+        </div>
+        <div class="about-text">
+          <p>
+            <strong>Satuan Intelijen Kodam XXIII/Palaka Wira</strong> merupakan unsur staf yang melaksanakan kegiatan intelijen guna mendukung tugas pokok Kodam dalam menjaga stabilitas keamanan wilayah.
+          </p>
+          <p>
+            Satuan ini bertugas melakukan <strong>deteksi dini</strong> terhadap potensi ancaman, serta menyediakan produk intelijen strategis bagi pimpinan guna mendukung proses pengambilan keputusan yang cepat, tepat, dan akurat.
+          </p>
+          <p>
+            Dengan kemampuan analitik yang handal dan jaringan informasi yang terstruktur, Satuan Intelijen menjadi ujung tombak pengamanan wilayah operasional Kodam XXIII/Palaka Wira.
+          </p>
+        </div>
+      </div>
+      <div class="about-cards reveal-right">
+        <div class="about-card">
+          <div class="card-icon">🔍</div>
+          <div class="card-info">
+            <div class="card-title">Deteksi Dini Ancaman</div>
+            <div class="card-desc">Identifikasi dan penilaian dini terhadap potensi ancaman di wilayah operasional secara terstruktur dan sistematis.</div>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">📊</div>
+          <div class="card-info">
+            <div class="card-title">Analisis Intelijen</div>
+            <div class="card-desc">Pengolahan dan analisis data intelijen untuk menghasilkan produk intelijen yang akurat bagi pengambilan keputusan.</div>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">🔐</div>
+          <div class="card-info">
+            <div class="card-title">Pengamanan Informasi</div>
+            <div class="card-desc">Perlindungan informasi strategis negara dari kebocoran, manipulasi, dan upaya penetrasi oleh pihak tidak berwenang.</div>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">🛡️</div>
+          <div class="card-info">
+            <div class="card-title">Kontra Intelijen</div>
+            <div class="card-desc">Upaya penangkalan terhadap kegiatan intelijen asing dan ancaman non-tradisional yang dapat mengganggu stabilitas wilayah.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TUGAS & FUNGSI -->
+<section id="tugas">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;max-width:700px;margin:0 auto 4rem;">
+      <div class="section-tag" style="justify-content:center;">STRUKTUR OPERASIONAL</div>
+      <h2 class="section-heading">Tugas dan <span class="accent">Fungsi</span></h2>
+      <div class="divider-accent" style="margin:1.2rem auto;"></div>
+      <p class="section-sub" style="margin:0 auto;">Satuan Intelijen menjalankan fungsi-fungsi strategis dalam mendukung stabilitas dan keamanan wilayah operasional Kodam XXIII/Palaka Wira.</p>
+    </div>
+    <div class="tugas-grid">
+      <div class="tugas-card reveal">
+        <div class="tugas-num">// 01</div>
+        <div class="tugas-icon">🎯</div>
+        <div class="tugas-title">Pengumpulan Informasi Strategis</div>
+        <div class="tugas-desc">Melaksanakan pengumpulan informasi dan data intelijen dari berbagai sumber yang relevan untuk kepentingan operasional wilayah.</div>
+      </div>
+      <div class="tugas-card reveal">
+        <div class="tugas-num">// 02</div>
+        <div class="tugas-icon">🗺️</div>
+        <div class="tugas-title">Analisis Intelijen Wilayah</div>
+        <div class="tugas-desc">Menganalisis kondisi dan dinamika situasi wilayah secara komprehensif untuk menghasilkan penilaian intelijen yang objektif.</div>
+      </div>
+      <div class="tugas-card reveal">
+        <div class="tugas-num">// 03</div>
+        <div class="tugas-icon">👁️</div>
+        <div class="tugas-title">Monitoring Dinamika Sosial</div>
+        <div class="tugas-desc">Memantau perkembangan dinamika sosial, politik, dan keamanan yang berpotensi mengganggu stabilitas wilayah.</div>
+      </div>
+      <div class="tugas-card reveal">
+        <div class="tugas-num">// 04</div>
+        <div class="tugas-icon">⚠️</div>
+        <div class="tugas-title">Deteksi Dini Potensi Konflik</div>
+        <div class="tugas-desc">Melakukan identifikasi dan peringatan dini terhadap potensi konflik dan gangguan keamanan di wilayah operasional.</div>
+      </div>
+      <div class="tugas-card reveal">
+        <div class="tugas-num">// 05</div>
+        <div class="tugas-icon">🔒</div>
+        <div class="tugas-title">Pengamanan Informasi Strategis</div>
+        <div class="tugas-desc">Mengelola dan mengamankan informasi strategis negara agar tidak jatuh ke tangan pihak yang tidak berwenang.</div>
+      </div>
+      <div class="tugas-card reveal">
+        <div class="tugas-num">// 06</div>
+        <div class="tugas-icon">🤝</div>
+        <div class="tugas-title">Dukungan Operasi Teritorial</div>
+        <div class="tugas-desc">Memberikan dukungan intelijen bagi pelaksanaan operasi teritorial guna memastikan efektivitas tugas pokok Kodam.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CYBER MONITORING -->
+<section id="cyber">
+  <div class="container">
+    <div class="cyber-grid">
+      <div class="reveal-left">
+        <div class="section-header">
+          <div class="section-tag">DOMAIN DIGITAL</div>
+          <h2 class="section-heading">Monitoring Informasi &<br><span class="accent">Intelijen Siber</span></h2>
+          <div class="divider-accent"></div>
+        </div>
+        <div class="cyber-text">
+          <p>
+            Satuan Intelijen melaksanakan monitoring terhadap perkembangan informasi digital, media sosial, dan dinamika opini publik guna mendeteksi potensi disinformasi, propaganda, serta isu yang dapat memicu gangguan keamanan wilayah.
+          </p>
+          <p>
+            Dengan memanfaatkan teknologi analisis data dan kecerdasan buatan, Satuan Intelijen mampu mendeteksi pola ancaman siber, kampanye disinformasi terkoordinasi, dan pergerakan aktor-aktor yang mengancam stabilitas nasional.
+          </p>
+        </div>
+        <div class="cyber-metrics">
+          <div class="metric-card reveal">
+            <div class="metric-icon">📱</div>
+            <div class="metric-label">Analisis Media Sosial</div>
+          </div>
+          <div class="metric-card reveal">
+            <div class="metric-icon">📈</div>
+            <div class="metric-label">Analisis Sentimen</div>
+          </div>
+          <div class="metric-card reveal">
+            <div class="metric-icon">🛡️</div>
+            <div class="metric-label">Cyber Threat Detection</div>
+          </div>
+          <div class="metric-card reveal">
+            <div class="metric-icon">🔎</div>
+            <div class="metric-label">Monitoring Isu Strategis</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="dashboard-mock">
+          <div class="dash-header">
+            <div class="dash-dots"><span></span><span></span><span></span></div>
+            <div class="dash-title">INTEL_DASHBOARD v2.6 — CLASSIFIED</div>
+          </div>
+          <div class="dash-status-row">
+            <div class="dash-status-dot"></div>
+            SISTEM MONITORING AKTIF — KONEKSI AMAN
+          </div>
+          <div class="dash-modules">
+            <div class="dash-module">
+              <div class="dash-mod-label">Media Monitoring</div>
+              <div class="dash-mod-val green">AKTIF</div>
+              <div class="dash-bar"><div class="dash-bar-fill" style="width:92%"></div></div>
+            </div>
+            <div class="dash-module">
+              <div class="dash-mod-label">Threat Level</div>
+              <div class="dash-mod-val amber">MODERATE</div>
+              <div class="dash-bar"><div class="dash-bar-fill amber" style="width:45%"></div></div>
+            </div>
+            <div class="dash-module">
+              <div class="dash-mod-label">Analisis Sentimen</div>
+              <div class="dash-mod-val">78.3%</div>
+              <div class="dash-bar"><div class="dash-bar-fill" style="width:78%"></div></div>
+            </div>
+            <div class="dash-module">
+              <div class="dash-mod-label">Cyber Incidents</div>
+              <div class="dash-mod-val red">3 ALERT</div>
+              <div class="dash-bar"><div class="dash-bar-fill red" style="width:30%"></div></div>
+            </div>
+          </div>
+          <div class="dash-log">
+            <div class="dash-log-item">
+              <span class="dash-log-time">08:42</span>
+              <span class="dash-log-msg clear">▸ Platform X — Monitoring normal</span>
+            </div>
+            <div class="dash-log-item">
+              <span class="dash-log-time">09:15</span>
+              <span class="dash-log-msg alert">▸ Deteksi narasi disinformasi — analisis lanjut</span>
+            </div>
+            <div class="dash-log-item">
+              <span class="dash-log-time">10:03</span>
+              <span class="dash-log-msg">▸ Laporan sentimen publik dikirim ke pimpinan</span>
+            </div>
+            <div class="dash-log-item">
+              <span class="dash-log-time">11:30</span>
+              <span class="dash-log-msg alert">▸ Aktivitas siber anomali terdeteksi</span>
+            </div>
+            <div class="dash-log-item">
+              <span class="dash-log-time">12:47</span>
+              <span class="dash-log-msg clear">▸ Respons kontra-narasi diaktifkan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WILAYAH -->
+<section id="wilayah">
+  <div class="container">
+    <div class="wilayah-grid">
+      <div class="reveal-left">
+        <div class="map-header">Peta Wilayah Tanggung Jawab — Kodam XXIII</div>
+        <!-- SVG MAP stylized Papua / Maluku region -->
+        <svg class="map-svg" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- Grid lines -->
+          <g stroke="rgba(74,158,74,0.08)" stroke-width="0.5">
+            <line x1="0" y1="50" x2="500" y2="50"/><line x1="0" y1="100" x2="500" y2="100"/>
+            <line x1="0" y1="150" x2="500" y2="150"/><line x1="0" y1="200" x2="500" y2="200"/>
+            <line x1="0" y1="250" x2="500" y2="250"/><line x1="0" y1="300" x2="500" y2="300"/>
+            <line x1="50" y1="0" x2="50" y2="350"/><line x1="100" y1="0" x2="100" y2="350"/>
+            <line x1="150" y1="0" x2="150" y2="350"/><line x1="200" y1="0" x2="200" y2="350"/>
+            <line x1="250" y1="0" x2="250" y2="350"/><line x1="300" y1="0" x2="300" y2="350"/>
+            <line x1="350" y1="0" x2="350" y2="350"/><line x1="400" y1="0" x2="400" y2="350"/>
+            <line x1="450" y1="0" x2="450" y2="350"/>
+          </g>
+          <!-- Region shape (stylized) -->
+          <polygon points="60,180 90,120 160,90 240,80 310,95 380,110 440,130 470,170 460,220 410,250 350,270 280,265 200,260 130,250 80,230" 
+            fill="rgba(47,79,47,0.3)" stroke="rgba(74,158,74,0.6)" stroke-width="1.5" filter="url(#glow)"/>
+          <!-- Sub-regions -->
+          <polygon points="60,180 90,120 160,90 200,130 170,200 100,220" fill="rgba(47,79,47,0.4)" stroke="rgba(74,158,74,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+          <polygon points="200,130 310,95 380,110 360,170 280,200 200,200" fill="rgba(47,79,47,0.35)" stroke="rgba(74,158,74,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+          <!-- Markers -->
+          <circle cx="250" cy="155" r="6" fill="rgba(74,158,74,0.9)" filter="url(#glow)"/>
+          <circle cx="250" cy="155" r="12" fill="none" stroke="rgba(74,158,74,0.5)" stroke-width="1">
+            <animate attributeName="r" values="8;20;8" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.8;0;0.8" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <text x="262" y="150" fill="rgba(200,216,200,0.9)" font-family="Share Tech Mono" font-size="10" letter-spacing="1">MARKAS</text>
+          <circle cx="140" cy="175" r="4" fill="rgba(200,148,58,0.9)"/>
+          <circle cx="360" cy="150" r="4" fill="rgba(200,148,58,0.9)"/>
+          <circle cx="420" cy="190" r="4" fill="rgba(74,158,74,0.7)"/>
+          <circle cx="100" cy="200" r="4" fill="rgba(74,158,74,0.7)"/>
+          <!-- Labels -->
+          <text x="20" y="345" fill="rgba(74,158,74,0.5)" font-family="Share Tech Mono" font-size="8" letter-spacing="1">KODAM XXIII / PALAKA WIRA — WILAYAH OPERASIONAL</text>
+          <!-- Compass -->
+          <g transform="translate(460,30)">
+            <circle cx="0" cy="0" r="16" fill="rgba(28,46,28,0.8)" stroke="rgba(74,158,74,0.5)" stroke-width="1"/>
+            <text x="-4" y="-5" fill="rgba(74,158,74,0.9)" font-family="Share Tech Mono" font-size="9">N</text>
+            <line x1="0" y1="-12" x2="0" y2="-4" stroke="rgba(74,158,74,0.7)" stroke-width="1.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="reveal-right">
+        <div class="section-header">
+          <div class="section-tag">AREA OF RESPONSIBILITY</div>
+          <h2 class="section-heading">Wilayah <span class="accent">Tanggung Jawab</span></h2>
+          <div class="divider-accent"></div>
+        </div>
+        <div class="wilayah-info">
+          <p>
+            Kodam XXIII/Palaka Wira memiliki tanggung jawab pengamanan wilayah yang mencakup provinsi-provinsi di kawasan timur Indonesia. Satuan Intelijen bertugas mengawal stabilitas dan keamanan di seluruh wilayah operasional ini.
+          </p>
+          <div class="wilayah-list">
+            <div class="wilayah-item">Papua</div>
+            <div class="wilayah-item">Papua Barat</div>
+            <div class="wilayah-item">Papua Pegunungan</div>
+            <div class="wilayah-item">Papua Selatan</div>
+            <div class="wilayah-item">Papua Tengah</div>
+            <div class="wilayah-item">Papua Barat Daya</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIKASI -->
+<section id="publikasi">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;max-width:700px;margin:0 auto 4rem;">
+      <div class="section-tag" style="justify-content:center;">INFORMASI PUBLIK</div>
+      <h2 class="section-heading">Publikasi & <span class="accent">Informasi</span></h2>
+      <div class="divider-accent" style="margin:1.2rem auto;"></div>
+    </div>
+    <div class="pub-grid">
+      <div class="pub-card reveal">
+        <div class="pub-card-img">📊</div>
+        <div class="pub-card-body">
+          <div class="pub-meta">
+            <span class="pub-cat">Analisis Situasi</span>
+            <span class="pub-date">Mar 2026</span>
+          </div>
+          <div class="pub-title">Laporan Analisis Situasi Keamanan Wilayah Triwulan I</div>
+          <div class="pub-excerpt">Laporan komprehensif mengenai perkembangan situasi keamanan dan dinamika sosial di wilayah operasional Kodam XXIII/Palaka Wira.</div>
+          <div class="pub-link">Selengkapnya →</div>
+        </div>
+      </div>
+      <div class="pub-card reveal">
+        <div class="pub-card-img">🔔</div>
+        <div class="pub-card-body">
+          <div class="pub-meta">
+            <span class="pub-cat">Update Keamanan</span>
+            <span class="pub-date">Feb 2026</span>
+          </div>
+          <div class="pub-title">Update Situasi Keamanan Daerah Perbatasan</div>
+          <div class="pub-excerpt">Informasi terkini mengenai kondisi keamanan di daerah perbatasan wilayah operasional, termasuk langkah-langkah penanganan yang telah dilaksanakan.</div>
+          <div class="pub-link">Selengkapnya →</div>
+        </div>
+      </div>
+      <div class="pub-card reveal">
+        <div class="pub-card-img">🎖️</div>
+        <div class="pub-card-body">
+          <div class="pub-meta">
+            <span class="pub-cat">Kegiatan Satuan</span>
+            <span class="pub-date">Jan 2026</span>
+          </div>
+          <div class="pub-title">Pelaksanaan Latihan Intelijen Terpadu 2026</div>
+          <div class="pub-excerpt">Dokumentasi pelaksanaan latihan intelijen terpadu yang melibatkan seluruh unsur Satuan Intelijen Kodam XXIII/Palaka Wira.</div>
+          <div class="pub-link">Selengkapnya →</div>
+        </div>
+      </div>
+      <div class="pub-card reveal">
+        <div class="pub-card-img">🌐</div>
+        <div class="pub-card-body">
+          <div class="pub-meta">
+            <span class="pub-cat">Intelijen Siber</span>
+            <span class="pub-date">Jan 2026</span>
+          </div>
+          <div class="pub-title">Tren Ancaman Siber dan Disinformasi 2025–2026</div>
+          <div class="pub-excerpt">Kajian mendalam mengenai perkembangan ancaman siber, kampanye disinformasi, dan strategi pengamanan informasi digital.</div>
+          <div class="pub-link">Selengkapnya →</div>
+        </div>
+      </div>
+      <div class="pub-card reveal">
+        <div class="pub-card-img">📋</div>
+        <div class="pub-card-body">
+          <div class="pub-meta">
+            <span class="pub-cat">Strategis</span>
+            <span class="pub-date">Des 2025</span>
+          </div>
+          <div class="pub-title">Tinjauan Strategis Keamanan Regional Akhir Tahun</div>
+          <div class="pub-excerpt">Evaluasi dan tinjauan strategis terhadap perkembangan situasi keamanan regional selama tahun 2025 beserta proyeksi 2026.</div>
+          <div class="pub-link">Selengkapnya →</div>
+        </div>
+      </div>
+      <div class="pub-card reveal">
+        <div class="pub-card-img">🤝</div>
+        <div class="pub-card-body">
+          <div class="pub-meta">
+            <span class="pub-cat">Kerjasama</span>
+            <span class="pub-date">Nov 2025</span>
+          </div>
+          <div class="pub-title">Koordinasi Lintas Sektoral Pengamanan Wilayah</div>
+          <div class="pub-excerpt">Laporan pelaksanaan koordinasi dengan instansi keamanan lintas sektoral dalam rangka pengamanan terpadu wilayah Papua.</div>
+          <div class="pub-link">Selengkapnya →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISI MISI -->
+<section id="visi">
+  <div class="visi-inner">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;max-width:700px;margin:0 auto 4rem;">
+        <div class="section-tag" style="justify-content:center;">LANDASAN ORGANISASI</div>
+        <h2 class="section-heading">Visi dan <span class="accent">Misi</span></h2>
+        <div class="divider-accent" style="margin:1.2rem auto;"></div>
+      </div>
+      <div class="visi-grid">
+        <div class="visi-card reveal-left">
+          <div class="visi-card-title">VISI</div>
+          <div class="visi-body">
+            Menjadi satuan intelijen yang <strong style="color:var(--accent)">profesional, adaptif, dan unggul</strong> dalam mendukung stabilitas keamanan wilayah Kodam XXIII/Palaka Wira demi tegaknya kedaulatan dan keutuhan Negara Kesatuan Republik Indonesia.
+          </div>
+        </div>
+        <div class="visi-card reveal-right">
+          <div class="visi-card-title">MISI</div>
+          <div class="misi-list">
+            <div class="misi-item">
+              <div class="misi-bullet">01</div>
+              Melaksanakan deteksi dini terhadap ancaman nyata maupun potensial di wilayah operasional
+            </div>
+            <div class="misi-item">
+              <div class="misi-bullet">02</div>
+              Menghasilkan analisis intelijen yang akurat, tepat waktu, dan dapat diandalkan
+            </div>
+            <div class="misi-item">
+              <div class="misi-bullet">03</div>
+              Mendukung pengambilan keputusan pimpinan dengan produk intelijen berkualitas tinggi
+            </div>
+            <div class="misi-item">
+              <div class="misi-bullet">04</div>
+              Mengamankan informasi strategis negara dari ancaman eksternal maupun internal
+            </div>
+            <div class="misi-item">
+              <div class="misi-bullet">05</div>
+              Meningkatkan kapabilitas personel intelijen secara berkelanjutan dan terukur
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="container">
+    <div class="section-header reveal" style="max-width:700px;margin-bottom:4rem;">
+      <div class="section-tag">KOMUNIKASI RESMI</div>
+      <h2 class="section-heading">Hubungi <span class="accent">Satuan</span></h2>
+      <div class="divider-accent"></div>
+      <p class="section-sub">Sampaikan informasi atau pertanyaan Anda melalui saluran komunikasi resmi Satuan Intelijen Kodam XXIII/Palaka Wira.</p>
+    </div>
+    <div class="kontak-grid">
+      <div class="kontak-info reveal-left">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Lokasi</div>
+            <div class="contact-value">Markas Kodam XXIII / Palaka Wira<br>Jalan Poros Sentani, Papua</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Surat Elektronik</div>
+            <div class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfa6a1bbaaa3a6a5aaa18fa4a0abaea2fdfce1a2a6a3e1a6ab">[email&#160;protected]</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Telepon</div>
+            <div class="contact-value">+62 xxx xxxx xxxx</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Jam Kerja</div>
+            <div class="contact-value">Senin – Jumat: 07.30 – 16.00 WIT<br>Darurat: 24 Jam</div>
+          </div>
+        </div>
+        <div style="background:rgba(74,158,74,.08);border:1px solid var(--border);padding:1.2rem;font-family:var(--font-mono);font-size:.68rem;color:var(--steel);line-height:1.7;">
+          ⚠ PERHATIAN: Seluruh komunikasi melalui saluran ini bersifat resmi dan terdokumentasi. Penyampaian informasi palsu merupakan pelanggaran hukum.
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="kontak-form" id="contactForm">
+          <div style="font-family:var(--font-mono);font-size:.65rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;">
+            // FORMULIR KONTAK AMAN
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <input class="form-input" type="text" placeholder="Masukkan nama lengkap Anda" id="fname">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Alamat Email</label>
+            <input class="form-input" type="email" placeholder="alamat@email.com" id="femail">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Instansi / Organisasi (opsional)</label>
+            <input class="form-input" type="text" id="finstansi" placeholder="Nama instansi atau organisasi">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pesan</label>
+            <textarea class="form-textarea" placeholder="Sampaikan pesan, informasi, atau pertanyaan Anda di sini..." id="fmsg"></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">⬡ Kirim Pesan</button>
+          <div id="form-msg" style="font-family:var(--font-mono);font-size:.7rem;color:var(--accent);margin-top:.8rem;display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name">Satuan Intelijen Kodam XXIII / Palaka Wira</div>
+        <div class="brand-sub">Tentara Nasional Indonesia Angkatan Darat</div>
+        <p>Mengawal stabilitas wilayah melalui kecerdasan intelijen, dedikasi personel, dan komitmen terhadap kedaulatan Negara Kesatuan Republik Indonesia.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigasi</div>
+        <div class="footer-links">
+          <a href="#hero">Beranda</a>
+          <a href="#about">Profil Satuan</a>
+          <a href="#tugas">Tugas & Fungsi</a>
+          <a href="#cyber">Intelijen Siber</a>
+          <a href="#wilayah">Wilayah Operasi</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Informasi</div>
+        <div class="footer-links">
+          <a href="#publikasi">Publikasi</a>
+          <a href="#visi">Visi & Misi</a>
+          <a href="#kontak">Kontak</a>
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Ketentuan Penggunaan</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2026 <span>Kodam XXIII / Palaka Wira</span> — Tentara Nasional Indonesia Angkatan Darat. Hak Cipta Dilindungi.
+      </div>
+      <div class="footer-badge">
+        SISTEM TERENKRIPSI · AKSES TERBATAS
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<div id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Kembali ke atas">▲</div>
+
+<!-- DARK MODE TOGGLE -->
+<div id="dark-toggle" onclick="toggleDarkMode()" title="Ganti tema">🌙</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── NAVBAR SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+
+  // BTT
+  const btt = document.getElementById('btt');
+  if (window.scrollY > 400) btt.classList.add('show');
+  else btt.classList.remove('show');
+});
+
+// ── MOBILE NAV ──
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const tog = document.getElementById('navToggle');
+  nav.classList.toggle('open');
+  tog.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+
+// ── REVEAL ON SCROLL ──
+const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), 100);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+reveals.forEach(el => revealObs.observe(el));
+
+// Stagger children inside grids
+document.querySelectorAll('.tugas-grid, .pub-grid').forEach(grid => {
+  Array.from(grid.children).forEach((child, i) => {
+    child.style.transitionDelay = (i * 0.08) + 's';
+  });
+});
+
+// ── [data-reveal] in hero ──
+document.querySelectorAll('[data-reveal]').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity .7s ease, transform .7s ease';
+  el.style.transitionDelay = (0.3 + i * 0.15) + 's';
+  setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 100);
+});
+
+// ── DARK MODE ──
+let isDark = true;
+function toggleDarkMode() {
+  isDark = !isDark;
+  document.body.classList.toggle('light-mode', !isDark);
+  document.getElementById('dark-toggle').textContent = isDark ? '🌙' : '☀️';
+}
+
+// ── DASH BAR ANIMATION on scroll ──
+const dashBars = document.querySelectorAll('.dash-bar-fill');
+const dashObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const w = e.target.style.width;
+      e.target.style.width = '0%';
+      setTimeout(() => { e.target.style.width = w; }, 300);
+      dashObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+dashBars.forEach(b => { b.dataset.w = b.style.width; b.style.width = '0%'; dashObs.observe(b); });
+
+// ── CONTACT FORM ──
+async function submitForm() {
+  const nama     = document.getElementById('fname').value.trim();
+  const email    = document.getElementById('femail').value.trim();
+  const instansi = document.getElementById('finstansi') ? document.getElementById('finstansi').value.trim() : '';
+  const pesan    = document.getElementById('fmsg').value.trim();
+  const msgEl    = document.getElementById('form-msg');
+  const btn      = document.querySelector('.form-submit');
+
+  msgEl.style.display = 'none';
+
+  if (!nama || !email || !pesan) {
+    msgEl.style.color = '#e05555';
+    msgEl.textContent = '⚠ Harap lengkapi semua kolom yang wajib diisi.';
+    msgEl.style.display = 'block'; return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msgEl.style.color = '#e05555';
+    msgEl.textContent = '⚠ Format alamat email tidak valid.';
+    msgEl.style.display = 'block'; return;
+  }
+
+  btn.textContent = '⟳ Mengirim...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nama, email, instansi, pesan })
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      msgEl.style.color = 'var(--accent)';
+      msgEl.textContent = '✓ Pesan berhasil dikirim. Konfirmasi telah dikirim ke email Anda.';
+      document.getElementById('fname').value = '';
+      document.getElementById('femail').value = '';
+      document.getElementById('fmsg').value = '';
+      if (document.getElementById('finstansi')) document.getElementById('finstansi').value = '';
+    } else {
+      msgEl.style.color = '#e05555';
+      msgEl.textContent = '⚠ ' + (data.error || 'Gagal mengirim pesan.');
+    }
+  } catch (err) {
+    msgEl.style.color = '#e05555';
+    msgEl.textContent = '⚠ Koneksi gagal. Coba beberapa saat lagi.';
+  } finally {
+    msgEl.style.display = 'block';
+    btn.textContent = '⬡ Kirim Pesan';
+    btn.disabled = false;
+  }
+}
+
+// ── SMOOTH ANCHOR ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.ge

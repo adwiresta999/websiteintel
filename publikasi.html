@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publikasi — Satuan Intelijen Kodam XXIII / Palaka Wira</title>
+<meta name="description" content="Publikasi dan informasi terkini dari Satuan Intelijen Kodam XXIII/Palaka Wira.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#2F4F2F;--green-lt:#3d6b3d;--accent:#4a9e4a;--accent-glow:rgba(74,158,74,.3);
+  --black:#050a05;--dark:#0d1a0d;--dark2:#111f11;--mid:#1c2e1c;
+  --border:rgba(74,158,74,.18);--border-lt:rgba(74,158,74,.35);
+  --text:#c8d8c8;--text-lt:#e8f0e8;--steel:#8a9e8a;
+  --font-d:'Barlow Condensed',sans-serif;--font-b:'Barlow',sans-serif;--font-m:'Share Tech Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-b);background:var(--black);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(74,158,74,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(74,158,74,.04) 1px,transparent 1px);background-size:60px 60px;}
+
+.container{max-width:1100px;margin:0 auto;padding:0 2rem;}
+
+/* Navbar */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.9rem 0;background:rgba(5,10,5,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{display:flex;align-items:center;gap:.8rem;text-decoration:none;}
+.nav-emblem{width:34px;height:34px;background:linear-gradient(135deg,var(--green),var(--dark));border:1px solid var(--border-lt);display:flex;align-items:center;justify-content:center;font-size:.9rem;clip-path:polygon(50% 0%,95% 25%,95% 75%,50% 100%,5% 75%,5% 25%);}
+.nav-title{font-family:var(--font-d);font-size:.9rem;font-weight:700;color:var(--text-lt);letter-spacing:.06em;text-transform:uppercase;}
+.nav-back{font-family:var(--font-m);font-size:.65rem;color:var(--accent);letter-spacing:.1em;text-decoration:none;display:flex;align-items:center;gap:.4rem;}
+.nav-back:hover{color:var(--text-lt);}
+
+/* Hero */
+.page-hero{padding:8rem 0 4rem;border-bottom:1px solid var(--border);}
+.page-tag{font-family:var(--font-m);font-size:.65rem;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem;}
+.page-tag::before{content:'//';}
+.page-title{font-family:var(--font-d);font-size:clamp(2.5rem,5vw,4rem);font-weight:900;color:var(--text-lt);text-transform:uppercase;letter-spacing:.02em;line-height:1;}
+.page-sub{font-size:.95rem;color:var(--steel);margin-top:.8rem;line-height:1.7;max-width:550px;}
+
+/* Filter */
+.filter-bar{padding:2rem 0;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--border);}
+.filter-btn{
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.4rem .9rem;background:transparent;border:1px solid var(--border);color:var(--steel);
+  cursor:pointer;transition:all .25s;
+}
+.filter-btn:hover,.filter-btn.active{background:rgba(74,158,74,.12);border-color:var(--accent);color:var(--accent);}
+.search-wrap{margin-left:auto;display:flex;align-items:center;gap:.5rem;background:var(--mid);border:1px solid var(--border);padding:.4rem .9rem;}
+.search-wrap input{background:none;border:none;color:var(--text-lt);font-family:var(--font-b);font-size:.85rem;outline:none;width:200px;}
+.search-wrap input::placeholder{color:var(--steel);}
+
+/* Grid */
+.pub-section{padding:3rem 0;}
+.pub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.pub-card{
+  background:var(--mid);border:1px solid var(--border);overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%);
+  transition:all .3s;cursor:pointer;
+}
+.pub-card:hover{border-color:var(--border-lt);transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,0,0,.5);}
+.pub-card-img{
+  height:130px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;
+  background:linear-gradient(135deg,var(--green),var(--dark2));border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+}
+.pub-card-img::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(74,158,74,.04) 8px,rgba(74,158,74,.04) 9px);}
+.pub-card-body{padding:1.3rem;}
+.pub-meta{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;}
+.pub-cat{font-family:var(--font-m);font-size:.58rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;background:rgba(74,158,74,.1);border:1px solid var(--border);padding:.15rem .5rem;}
+.pub-date{font-family:var(--font-m);font-size:.58rem;color:var(--steel);}
+.pub-title{font-family:var(--font-d);font-size:1rem;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:.03em;line-height:1.3;margin-bottom:.6rem;}
+.pub-excerpt{font-size:.8rem;color:var(--steel);line-height:1.65;}
+.pub-link{display:inline-flex;align-items:center;gap:.3rem;margin-top:.8rem;font-family:var(--font-m);font-size:.6rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;transition:gap .25s;}
+.pub-link:hover{gap:.7rem;}
+
+/* Detail modal */
+.detail-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);display:none;align-items:flex-start;justify-content:center;padding:5rem 1.5rem 2rem;overflow-y:auto;}
+.detail-overlay.open{display:flex;}
+.detail-modal{background:var(--dark);border:1px solid var(--border-lt);width:100%;max-width:720px;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%);}
+.detail-head{padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
+.detail-close{background:none;border:none;color:var(--steel);cursor:pointer;font-size:1.2rem;flex-shrink:0;}
+.detail-close:hover{color:var(--text-lt);}
+.detail-body{padding:2rem;}
+.detail-cat{font-family:var(--font-m);font-size:.6rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.7rem;}
+.detail-title{font-family:var(--font-d);font-size:1.8rem;font-weight:900;color:var(--text-lt);text-transform:uppercase;letter-spacing:.03em;line-height:1.1;margin-bottom:1rem;}
+.detail-meta{font-family:var(--font-m);font-size:.62rem;color:var(--steel);letter-spacing:.1em;margin-bottom:1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;}
+.detail-meta span{color:var(--accent);}
+.detail-content{font-size:.95rem;line-height:1.85;color:var(--text);}
+
+.empty-state{padding:4rem;text-align:center;color:var(--steel);font-family:var(--font-m);font-size:.75rem;letter-spacing:.1em;}
+.loading{display:flex;align-items:center;justify-content:center;padding:4rem;font-family:var(--font-m);font-size:.7rem;color:var(--accent);letter-spacing:.2em;gap:.7rem;}
+.loading::before{content:'';width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+footer{padding:2rem 0;border-top:1px solid var(--border);text-align:center;font-family:var(--font-m);font-size:.6rem;color:var(--steel);letter-spacing:.1em;}
+footer a{color:var(--accent);text-decoration:none;}
+
+@media(max-width:768px){.pub-grid{grid-template-columns:1fr;}.filter-bar{gap:.6rem;}.search-wrap{margin-left:0;width:100%;}}
+@media(max-width:480px){.pub-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-brand" href="/">
+        <div class="nav-emblem">⬡</div>
+        <div class="nav-title">Satuan Intelijen Kodam XXIII</div>
+      </a>
+      <a class="nav-back" href="/">← Beranda</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-tag">Informasi Publik</div>
+    <h1 class="page-title">Publikasi &<br>Informasi</h1>
+    <p class="page-sub">Informasi resmi, analisis situasi, dan kegiatan Satuan Intelijen Kodam XXIII/Palaka Wira.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterKategori('',this)">Semua</button>
+    <button class="filter-btn" onclick="filterKategori('Analisis Situasi',this)">Analisis Situasi</button>
+    <button class="filter-btn" onclick="filterKategori('Update Keamanan',this)">Update Keamanan</button>
+    <button class="filter-btn" onclick="filterKategori('Kegiatan Satuan',this)">Kegiatan Satuan</button>
+    <button class="filter-btn" onclick="filterKategori('Intelijen Siber',this)">Intel Siber</button>
+    <button class="filter-btn" onclick="filterKategori('Strategis',this)">Strategis</button>
+    <div class="search-wrap">
+      <span style="color:var(--steel);font-size:.8rem;">🔎</span>
+      <input type="text" placeholder="Cari publikasi..." id="searchInput" oninput="doSearch()">
+    </div>
+  </div>
+</div>
+
+<section class="pub-section">
+  <div class="container">
+    <div id="pubContent"><div class="loading">Memuat publikasi...</div></div>
+  </div>
+</section>
+
+<!-- DETAIL MODAL -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="detail-modal">
+    <div class="detail-head">
+      <div style="flex:1;">
+        <div class="detail-cat" id="dCat"></div>
+        <div class="detail-title" id="dTitle"></div>
+      </div>
+      <button class="detail-close" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="detail-body">
+      <div class="detail-meta" id="dMeta"></div>
+      <div class="detail-content" id="dContent"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/">← Kembali ke Halaman Utama</a> &nbsp;·&nbsp;
+  © 2026 Kodam XXIII / Palaka Wira
+</footer>
+
+<script>
+const ICONS = {'Analisis Situasi':'📊','Update Keamanan':'🔔','Kegiatan Satuan':'🎖️','Intelijen Siber':'🌐','Strategis':'📋','Kerjasama':'🤝'};
+let allPub = [], currentKat = '', currentQ = '';
+
+async function loadPub() {
+  try {
+    let url = '/api/publikasi';
+    if (currentKat) url += '?kategori=' + encodeURIComponent(currentKat);
+    const res = await fetch(url);
+    const data = await res.json();
+    allPub = data.data || [];
+    render();
+  } catch(e) {
+    document.getElementById('pubContent').innerHTML = '<div class="empty-state">Gagal memuat data. Coba refresh halaman.</div>';
+  }
+}
+
+function render() {
+  let list = allPub;
+  if (currentQ) list = list.filter(p => p.judul.toLowerCase().includes(currentQ) || p.ringkasan.toLowerCase().includes(currentQ));
+  
+  if (!list.length) {
+    document.getElementById('pubContent').innerHTML = '<div class="empty-state">Tidak ada publikasi ditemukan.</div>';
+    return;
+  }
+  const html = `<div class="pub-grid">${list.map(p => `
+    <div class="pub-card" onclick="openDetail('${p.id}')">
+      <div class="pub-card-img">${ICONS[p.kategori] || '📄'}</div>
+      <div class="pub-card-body">
+        <div class="pub-meta">
+          <span class="pub-cat">${p.kategori}</span>
+          <span class="pub-date">${new Date(p.tanggal).toLocaleDateString('id-ID',{year:'numeric',month:'short',day:'numeric'})}</span>
+        </div>
+        <div class="pub-title">${p.judul}</div>
+        <div class="pub-excerpt">${p.ringkasan}</div>
+        <div class="pub-link">Selengkapnya →</div>
+      </div>
+    </div>`).join('')}</div>`;
+  document.getElementById('pubContent').innerHTML = html;
+}
+
+function filterKategori(kat, btn) {
+  currentKat = kat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  loadPub();
+}
+
+function doSearch() {
+  currentQ = document.getElementById('searchInput').value.toLowerCase().trim();
+  render();
+}
+
+function openDetail(id) {
+  const p = allPub.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('dCat').textContent = p.kategori;
+  document.getElementById('dTitle').textContent = p.judul;
+  document.getElementById('dMeta').innerHTML = `
+    <div>TANGGAL: <span>${new Date(p.tanggal).toLocaleDateString('id-ID',{dateStyle:'long'})}</span></div>
+    <div>PENULIS: <span>${p.penulis}</span></div>`;
+  document.getElementById('dContent').innerHTML = `<p style="margin-bottom:1rem;color:var(--steel);font-style:italic;">${p.ringkasan}</p><p>${p.konten}</p>`;
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail(e) {
+  if (e && e.target !== document.getElementById('detailOverlay')) return;
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+loadPub();
+</script>
+</body>
+</html>
